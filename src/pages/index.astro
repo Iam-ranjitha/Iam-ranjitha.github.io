@@ -8,7 +8,6 @@ import Skills from '../components/Skills.astro';
 import Credentials from '../components/Credentials.astro';
 import Contact from '../components/Contact.astro';
 import Footer from '../components/Footer.astro';
-import ContactDialog from '../components/ContactDialog.astro';
 import { profile, years } from '../lib/content';
 
 const description = `${profile.role} in ${profile.location.split(',')[0]} with ${years}+ years in Agile delivery across software, CMS, mobile app and automotive projects.`;
@@ -25,5 +24,4 @@ const description = `${profile.role} in ${profile.location.split(',')[0]} with $
     <Contact />
   </main>
   <Footer />
-  <ContactDialog />
 </Base>

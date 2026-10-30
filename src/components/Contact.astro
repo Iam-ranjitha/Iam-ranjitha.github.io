@@ -1,50 +1,224 @@
 ---
-import { profile } from '../lib/content';
+import { profile, firstName } from '../lib/content';
+
+// Messages are delivered to the owner's inbox by a form service (FormSubmit for now).
+const endpoint = `https://formsubmit.co/ajax/${profile.email}`;
+const topics = ['Just saying hi', 'About PMI', 'Communities', 'Working together', 'A question'];
 ---
 
 <section class="block" id="contact">
   <div class="wrap">
     <div class="panel">
-      <p class="kicker">Contact</p>
-      <h2>{profile.contact.heading}</h2>
-      <p class="text">{profile.contact.text}</p>
-      <div class="cta">
-        <button class="btn btn-primary" type="button" data-open-contact>Get in touch</button>
-        <a class="btn btn-ghost" href={profile.links.linkedin}>LinkedIn</a>
-        <a class="btn btn-ghost" href={profile.links.github}>GitHub</a>
+      <div class="intro">
+        <p class="kicker">Contact</p>
+        <h2>{profile.contact.heading}</h2>
+        <p class="text">{profile.contact.text}</p>
+        <div class="cta">
+          <a class="btn btn-ghost" href={profile.links.linkedin}>LinkedIn</a>
+          <a class="btn btn-ghost" href={profile.links.github}>GitHub</a>
+        </div>
+        <p class="mail">{profile.email}</p>
       </div>
-      <p class="mail">{profile.email}</p>
+
+      <form id="contact-form" class="card" data-endpoint={endpoint} data-email={profile.email} data-name={firstName} novalidate>
+        <h3>Send a message</h3>
+        <label>
+          Name
+          <input name="name" type="text" autocomplete="name" required />
+        </label>
+        <label>
+          Email
+          <input name="email" type="email" autocomplete="email" required />
+        </label>
+        <label>
+          What's this about?
+          <select name="topic" required>
+            <option value="" disabled selected>Choose one</option>
+            {topics.map((t) => <option value={t}>{t}</option>)}
+          </select>
+        </label>
+        <label>
+          Message
+          <textarea name="message" rows="5" required></textarea>
+        </label>
+        <input class="hp" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" />
+        <button class="btn btn-primary" id="cf-send" type="submit">Send message</button>
+        <p class="status" id="cf-status" role="status" aria-live="polite"></p>
+      </form>
     </div>
   </div>
 </section>
 
+<script is:inline>
+  (function () {
+    var form = document.getElementById('contact-form');
+    if (!form) return;
+    var status = document.getElementById('cf-status');
+    var send = document.getElementById('cf-send');
+    var endpoint = form.dataset.endpoint;
+    var mail = form.dataset.email;
+
+    function setStatus(text, kind, withMail) {
+      status.className = 'status ' + (kind || '');
+      status.textContent = text;
+      if (withMail) {
+        var a = document.createElement('a');
+        a.href = 'mailto:' + mail;
+        a.textContent = mail;
+        status.appendChild(a);
+        status.appendChild(document.createTextNode(' directly.'));
+      }
+    }
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+      var data = new FormData(form);
+      if (data.get('_honey')) return;
+      var topic = data.get('topic');
+      send.disabled = true;
+      setStatus('Sending…');
+      var ctl = new AbortController();
+      var timer = setTimeout(function () {
+        ctl.abort();
+      }, 15000);
+      fetch(endpoint, {
+        method: 'POST',
+        signal: ctl.signal,
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          name: data.get('name'),
+          email: data.get('email'),
+          topic: topic,
+          message: data.get('message'),
+          _subject: 'Website message: ' + topic,
+          _template: 'table',
+          _captcha: 'false',
+        }),
+      })
+        .then(function (r) {
+          if (!r.ok) throw new Error('bad status');
+          return r.json();
+        })
+        .then(function (j) {
+          if (j && (j.success === 'true' || j.success === true)) {
+            form.reset();
+            setStatus('Thanks! Your message is on its way. ' + form.dataset.name + ' will reply by email.', 'ok');
+          } else {
+            throw new Error('not sent');
+          }
+        })
+        .catch(function () {
+          setStatus('Sorry, that did not go through. Please email ', 'err', true);
+        })
+        .finally(function () {
+          clearTimeout(timer);
+          send.disabled = false;
+        });
+    });
+  })();
+</script>
+
 <style>
   .panel {
-    background: var(--gold-tint);
+    background: var(--navy-tint);
     border-radius: 32px;
-    padding: clamp(28px, 6vw, 72px);
+    padding: clamp(24px, 5vw, 64px);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(24px, 4vw, 56px);
+    align-items: start;
   }
   h2 {
-    font-size: clamp(2rem, 5vw, 3.4rem);
+    font-size: clamp(2rem, 4.6vw, 3.2rem);
     margin-bottom: 16px;
   }
   .text {
-    max-width: 52ch;
-    font-size: 1.2rem;
-    margin-bottom: 28px;
+    max-width: 46ch;
+    font-size: 1.15rem;
+    margin-bottom: 26px;
   }
   .cta {
     display: flex;
     flex-wrap: wrap;
     gap: 12px;
   }
-  button.btn {
-    font-family: inherit;
-    cursor: pointer;
-  }
   .mail {
     margin: 22px 0 0;
     color: var(--ink);
     font-weight: 500;
+  }
+  form {
+    display: grid;
+    gap: 16px;
+    background: var(--card);
+  }
+  h3 {
+    font-size: 1.5rem;
+  }
+  label {
+    display: grid;
+    gap: 6px;
+    font-weight: 600;
+    color: var(--ink);
+    font-size: 0.97rem;
+  }
+  input,
+  select,
+  textarea {
+    font: inherit;
+    font-weight: 400;
+    color: var(--text);
+    padding: 12px 14px;
+    border: 1.5px solid var(--line);
+    border-radius: 12px;
+    background: #fff;
+    width: 100%;
+  }
+  textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+  input:focus,
+  select:focus,
+  textarea:focus {
+    outline: 3px solid var(--navy-tint);
+    border-color: var(--navy);
+  }
+  .hp {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+  }
+  #cf-send {
+    justify-self: start;
+    font-family: inherit;
+    cursor: pointer;
+  }
+  #cf-send:disabled {
+    opacity: 0.6;
+    cursor: wait;
+  }
+  .status {
+    margin: 0;
+    min-height: 1.4em;
+    font-size: 0.97rem;
+  }
+  .status.ok {
+    color: #1d6b3c;
+    font-weight: 600;
+  }
+  .status.err {
+    color: var(--terra);
+    font-weight: 600;
+  }
+  @media (max-width: 860px) {
+    .panel {
+      grid-template-columns: 1fr;
+    }
   }
 </style>

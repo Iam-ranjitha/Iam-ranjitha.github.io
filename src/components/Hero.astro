@@ -17,7 +17,7 @@ import { profile, initials, numbers } from '../lib/content';
         {profile.focus.map((f) => <li class="chip">{f}</li>)}
       </ul>
       <div class="cta">
-        <button class="btn btn-primary" type="button" data-open-contact>Get in touch</button>
+        <a class="btn btn-primary" href="#contact">Get in touch</a>
         <a class="btn btn-ghost" href="/cv/">View my CV</a>
       </div>
     </div>
@@ -130,10 +130,6 @@ import { profile, initials, numbers } from '../lib/content';
     display: flex;
     flex-wrap: wrap;
     gap: 12px;
-  }
-  button.btn {
-    font-family: inherit;
-    cursor: pointer;
   }
   .portrait {
     justify-self: center;
