@@ -1,0 +1,114 @@
+---
+// Rendered to /og.jpg (the link preview image) after the build, then removed.
+import '@fontsource-variable/dm-sans';
+import '@fontsource-variable/fraunces';
+import { profile, years, initials } from '../lib/content';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="robots" content="noindex" />
+  </head>
+  <body>
+    <div class="og">
+      <div class="blob a"></div>
+      <div class="blob b"></div>
+      <div class="blob c"></div>
+      <div class="mark">{initials}</div>
+      <h1>{profile.name}</h1>
+      <p class="role">{profile.role} · {years}+ years in Agile delivery</p>
+      <p class="focus">{profile.focus.join('  ·  ')}</p>
+      <p class="url">{profile.site.replace('https://', '')}</p>
+    </div>
+  </body>
+</html>
+
+<style is:global>
+  body {
+    margin: 0;
+  }
+  .og {
+    position: relative;
+    overflow: hidden;
+    width: 1200px;
+    height: 630px;
+    padding: 80px 88px;
+    box-sizing: border-box;
+    color: #12254a;
+    font-family: 'DM Sans Variable', sans-serif;
+    background: #f3f7fd;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.6;
+  }
+  .a {
+    width: 520px;
+    height: 520px;
+    background: #9bbcf0;
+    right: -120px;
+    top: -160px;
+  }
+  .b {
+    width: 420px;
+    height: 420px;
+    background: #f4dccd;
+    right: 120px;
+    bottom: -200px;
+  }
+  .c {
+    width: 360px;
+    height: 360px;
+    background: #cfdff8;
+    left: -140px;
+    bottom: -180px;
+  }
+  .og > :not(.blob) {
+    position: relative;
+  }
+  .mark {
+    width: 104px;
+    height: 104px;
+    border-radius: 50%;
+    background: #2456a8;
+    color: #ffffff;
+    display: grid;
+    place-items: center;
+    font-family: 'Fraunces Variable', serif;
+    font-size: 40px;
+    font-weight: 600;
+    margin-bottom: 28px;
+  }
+  h1 {
+    font-family: 'Fraunces Variable', serif;
+    font-size: 84px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    margin: 0;
+    line-height: 1;
+  }
+  .role {
+    font-size: 34px;
+    margin: 18px 0 0;
+    color: #2456a8;
+    font-weight: 600;
+  }
+  .focus {
+    font-size: 26px;
+    margin: 14px 0 0;
+    color: #55627a;
+  }
+  .url {
+    font-size: 24px;
+    margin: 40px 0 0;
+    color: #b5472a;
+    font-weight: 600;
+  }
+</style>

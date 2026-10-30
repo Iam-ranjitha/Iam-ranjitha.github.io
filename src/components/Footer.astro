@@ -1,0 +1,28 @@
+---
+import { profile } from '../lib/content';
+---
+
+<footer>
+  <div class="wrap">
+    <p>© {new Date().getFullYear()} {profile.name} · {profile.location}</p>
+    <p><a href="/cv/">CV</a> · <a href={profile.links.linkedin}>LinkedIn</a> · <a href={profile.links.github}>GitHub</a></p>
+  </div>
+</footer>
+
+<style>
+  footer {
+    border-top: 1px solid var(--line);
+    padding: 28px 0 40px;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+  .wrap {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px 24px;
+  }
+  p {
+    margin: 0;
+  }
+</style>

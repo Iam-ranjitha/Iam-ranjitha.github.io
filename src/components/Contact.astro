@@ -1,0 +1,50 @@
+---
+import { profile } from '../lib/content';
+---
+
+<section class="block" id="contact">
+  <div class="wrap">
+    <div class="panel">
+      <p class="kicker">Contact</p>
+      <h2>{profile.contact.heading}</h2>
+      <p class="text">{profile.contact.text}</p>
+      <div class="cta">
+        <button class="btn btn-primary" type="button" data-open-contact>Get in touch</button>
+        <a class="btn btn-ghost" href={profile.links.linkedin}>LinkedIn</a>
+        <a class="btn btn-ghost" href={profile.links.github}>GitHub</a>
+      </div>
+      <p class="mail">{profile.email}</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .panel {
+    background: var(--gold-tint);
+    border-radius: 32px;
+    padding: clamp(28px, 6vw, 72px);
+  }
+  h2 {
+    font-size: clamp(2rem, 5vw, 3.4rem);
+    margin-bottom: 16px;
+  }
+  .text {
+    max-width: 52ch;
+    font-size: 1.2rem;
+    margin-bottom: 28px;
+  }
+  .cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  button.btn {
+    font-family: inherit;
+    cursor: pointer;
+  }
+  .mail {
+    margin: 22px 0 0;
+    color: var(--ink);
+    font-weight: 500;
+  }
+</style>

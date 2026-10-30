@@ -1,0 +1,52 @@
+---
+import { skills } from '../lib/content';
+const tints = ['var(--navy-tint)', 'var(--gold-tint)', 'var(--terra-tint)', 'var(--navy-tint)'];
+---
+
+<section class="block" id="skills">
+  <div class="wrap">
+    <p class="kicker">Skills</p>
+    <h2>What I work with</h2>
+    <div class="grid">
+      {
+        skills.map((s, i) => (
+          <div class="card">
+            <h3>{s.group}</h3>
+            <ul>
+              {s.items.map((item) => (
+                <li class="chip" style={`background:${tints[i % tints.length]}`}>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+  h3 {
+    font-size: 1.35rem;
+    margin-bottom: 16px;
+  }
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  @media (max-width: 760px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

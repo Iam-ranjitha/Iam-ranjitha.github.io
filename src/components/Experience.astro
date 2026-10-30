@@ -1,0 +1,105 @@
+---
+import { experience } from '../lib/content';
+import { range, duration } from '../lib/dates';
+---
+
+<section class="block alt" id="experience">
+  <div class="wrap">
+    <p class="kicker">Experience</p>
+    <h2>Where I've worked</h2>
+    <ol class="list">
+      {
+        experience.flatMap((e) =>
+          e.roles.map((r, i) => (
+            <li class="card job">
+              <div class="meta">
+                <p class="dates">{range(r.start, r.end)}</p>
+                <p class="dur">{duration(r.start, r.end)}</p>
+              </div>
+              <div class="body">
+                <h3>{r.title}</h3>
+                <p class="org">
+                  {e.company}
+                  {i === 0 && e.location && <span> · {e.location}</span>}
+                </p>
+                {r.note && <p class="note">{r.note}</p>}
+                {r.highlights.length > 0 && (
+                  <ul>
+                    {r.highlights.map((h) => (
+                      <li>{h}</li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            </li>
+          )),
+        )
+      }
+    </ol>
+  </div>
+</section>
+
+<style>
+  .list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 18px;
+  }
+  .job {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: clamp(16px, 3vw, 40px);
+  }
+  .dates {
+    font-weight: 700;
+    color: var(--terra);
+    margin: 0 0 2px;
+  }
+  .dur {
+    color: var(--muted);
+    margin: 0;
+    font-size: 0.95rem;
+  }
+  h3 {
+    font-size: clamp(1.35rem, 2.6vw, 1.7rem);
+  }
+  .org {
+    margin: 4px 0 0;
+    font-weight: 600;
+    color: var(--navy);
+  }
+  .org span {
+    font-weight: 400;
+    color: var(--muted);
+  }
+  .note {
+    margin: 4px 0 0;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+  ul {
+    margin: 16px 0 0;
+    padding-left: 20px;
+  }
+  ul li {
+    margin-bottom: 8px;
+    padding-left: 4px;
+  }
+  ul li::marker {
+    color: var(--gold);
+  }
+  @media (max-width: 760px) {
+    .job {
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+    .meta {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: baseline;
+    }
+  }
+</style>

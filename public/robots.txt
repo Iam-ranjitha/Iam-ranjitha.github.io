@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://iam-ranjitha.github.io/sitemap.xml

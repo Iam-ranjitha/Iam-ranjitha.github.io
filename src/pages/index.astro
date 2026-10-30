@@ -1,0 +1,29 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Hero from '../components/Hero.astro';
+import About from '../components/About.astro';
+import Experience from '../components/Experience.astro';
+import Skills from '../components/Skills.astro';
+import Credentials from '../components/Credentials.astro';
+import Contact from '../components/Contact.astro';
+import Footer from '../components/Footer.astro';
+import ContactDialog from '../components/ContactDialog.astro';
+import { profile, years } from '../lib/content';
+
+const description = `${profile.role} in ${profile.location.split(',')[0]} with ${years}+ years in Agile delivery across software, CMS, mobile app and automotive projects.`;
+---
+
+<Base title={`${profile.name} · ${profile.role}`} description={description}>
+  <Nav />
+  <main id="main">
+    <Hero />
+    <About />
+    <Experience />
+    <Skills />
+    <Credentials />
+    <Contact />
+  </main>
+  <Footer />
+  <ContactDialog />
+</Base>

@@ -1,0 +1,29 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Page not found" description="This page doesn't exist." noindex>
+  <main id="main" class="wrap nf">
+    <p class="kicker">404</p>
+    <h1>This page wandered off.</h1>
+    <p>The page you were looking for isn't here, but the rest of the site is.</p>
+    <a class="btn btn-primary" href="/">Back home</a>
+  </main>
+</Base>
+
+<style>
+  .nf {
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+  }
+  h1 {
+    font-size: clamp(2.2rem, 7vw, 4rem);
+    margin-bottom: 16px;
+  }
+  p {
+    margin-bottom: 28px;
+  }
+</style>

@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.astro/
+.DS_Store
+.env
+
+# Private files that must never be published
+Ranjitha Resume.pdf
+website-builder-prompt.md
+site-notes.md
+WhatsApp Image*
+readme.md

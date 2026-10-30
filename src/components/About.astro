@@ -1,0 +1,48 @@
+---
+import { profile } from '../lib/content';
+---
+
+<section class="block" id="about">
+  <div class="wrap">
+    <p class="kicker">About</p>
+    <h2>Structured delivery, clear reporting, strong relationships.</h2>
+    <div class="cols">
+      <div class="text">
+        {profile.about.map((p) => <p>{p}</p>)}
+      </div>
+      <aside class="card off">
+        <h3>Away from work</h3>
+        <p>{profile.offWork}</p>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cols {
+    display: grid;
+    grid-template-columns: 1.4fr 0.6fr;
+    gap: clamp(24px, 4vw, 56px);
+    align-items: start;
+  }
+  .text p {
+    font-size: 1.175rem;
+    max-width: 62ch;
+  }
+  .off {
+    background: var(--gold-tint);
+    border-color: transparent;
+  }
+  .off h3 {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+  }
+  .off p {
+    margin: 0;
+  }
+  @media (max-width: 820px) {
+    .cols {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,23 @@
+---
+import '@fontsource-variable/dm-sans';
+import '@fontsource-variable/fraunces';
+import '../styles/global.css';
+import Head from '../components/Head.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  noindex?: boolean;
+}
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <Head {...Astro.props} />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <slot />
+  </body>
+</html>

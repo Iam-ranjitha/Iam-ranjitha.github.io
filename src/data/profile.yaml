@@ -1,0 +1,44 @@
+name: Ranjitha K N
+role: Project Coordinator
+company: In-tech
+location: Kochi, India
+careerStart: 2019-10
+email: ranjithak2898@gmail.com
+site: https://iam-ranjitha.github.io
+links:
+  linkedin: https://www.linkedin.com/in/ranjitha-kn
+  github: https://github.com/Iam-ranjitha
+photo: /uploads/photo.jpg
+focus:
+  - End-to-end project delivery
+  - Project planning and kickoff
+  - Status, risk and change reporting
+  - Budget and resource allocation
+  - Client and stakeholder management
+tagline: Project coordination and PMO support across software and automotive programmes, covering planning, schedule tracking, risk management and stakeholder reporting.
+numbers:
+  - value: '{years}+'
+    label: years in delivery and operations
+  - value: 30+
+    label: CMS and mobile app projects delivered
+  - value: 97%
+    label: on-time delivery
+  - value: 60+
+    label: deployments tracked to release
+contact:
+  heading: Let's connect
+  text: Feel free to connect with me to collaborate, discuss project management, or share best practices in project delivery.
+about:
+  - I'm a project coordinator based in Kochi, with a background in Agile delivery across software, CMS, mobile app and automotive projects.
+  - I've worked as a site reliability engineer and a project coordinator, and today I coordinate cross-functional teams at In-tech.
+  - I value clear communication, strong relationships with clients and teams, and steady improvement.
+  - I'm currently learning Generative AI and AI tools to see how they can make project delivery better.
+offWork: Outside work, I enjoy music, travel and painting.
+summary: Project Coordinator with {years} years of experience in Agile project delivery across software, CMS, mobile app and automotive projects, including two years as a Site Reliability Engineer on AWS. Coordinates cross-functional teams, turns client needs into clear plans, and keeps stakeholders informed with trackers, dashboards and risk reports. Values clear communication, strong relationships with clients and teams, and steady improvement. Currently learning Generative AI and AI tools to improve project delivery.
+languages:
+  - name: English
+    level: Fluent, professional
+  - name: Tamil
+    level: Fluent, professional
+  - name: Malayalam
+    level: Fluent, professional

@@ -1,0 +1,191 @@
+# yaml-language-server: $schema=https://unpkg.com/@sveltia/cms@0.250.2/schema/sveltia-cms.json
+backend:
+  name: github
+  repo: Iam-ranjitha/Iam-ranjitha.github.io
+  branch: main
+
+site_url: https://iam-ranjitha.github.io
+display_url: https://iam-ranjitha.github.io
+media_folder: public/uploads
+public_folder: /uploads
+output:
+  omit_empty_optional_fields: true
+
+singletons:
+  - name: profile
+    label: Profile
+    icon: person
+    file: src/data/profile.yaml
+    fields:
+      - { name: name, label: Full name }
+      - { name: role, label: Job title }
+      - { name: company, label: Current company, hint: Short name shown in the hero, e.g. In-tech }
+      - { name: location, label: Location }
+      - name: careerStart
+        label: Career start (YYYY-MM)
+        hint: Years of experience are counted from this month.
+        pattern: ['^\d{4}-\d{2}$', 'Use YYYY-MM, e.g. 2019-10']
+      - { name: email, label: Email, type: email }
+      - { name: site, label: Website URL, type: url }
+      - name: links
+        label: Links
+        widget: object
+        fields:
+          - { name: linkedin, label: LinkedIn, type: url }
+          - { name: github, label: GitHub, type: url }
+      - name: photo
+        label: Profile photo
+        widget: image
+        required: false
+        hint: Upload a portrait photo. Leave empty to show a coloured placeholder with your initials.
+      - { name: focus, label: Focus areas, widget: list, hint: Shown as tags in the hero. }
+      - { name: tagline, label: Tagline, widget: text }
+      - name: numbers
+        label: Highlight numbers
+        label_singular: Number
+        widget: list
+        summary: '{{value}} {{label}}'
+        hint: Use {years} in a value to insert your years of experience.
+        fields:
+          - { name: value, label: Number }
+          - { name: label, label: What it means }
+      - name: contact
+        label: Contact section
+        widget: object
+        fields:
+          - { name: heading, label: Heading }
+          - { name: text, label: Text, widget: text }
+      - name: about
+        label: About paragraphs
+        widget: list
+        label_singular: Paragraph
+        field: { name: paragraph, label: Paragraph, widget: text }
+      - { name: offWork, label: Away from work, widget: text }
+      - name: summary
+        label: CV summary
+        widget: text
+        hint: '{years} is replaced with your years of experience, e.g. 7+.'
+      - name: languages
+        label: Languages
+        widget: list
+        summary: '{{name}} ({{level}})'
+        fields:
+          - { name: name, label: Language }
+          - { name: level, label: Level }
+
+  - name: experience
+    label: Experience
+    icon: work
+    file: src/data/experience.yaml
+    fields:
+      - name: companies
+        label: Companies
+        label_singular: Company
+        widget: list
+        root: true
+        summary: '{{company}}'
+        hint: Newest first.
+        fields:
+          - { name: company, label: Company }
+          - { name: location, label: Location, required: false }
+          - name: draft
+            label: Placeholder text
+            widget: boolean
+            required: false
+            default: false
+            hint: While this is on, the live site won't publish. Use it for unfinished entries.
+          - name: roles
+            label: Roles
+            label_singular: Role
+            widget: list
+            summary: '{{title}} ({{start}} – {{end}})'
+            hint: Newest first.
+            fields:
+              - { name: title, label: Job title }
+              - name: start
+                label: Start (YYYY-MM)
+                pattern: ['^\d{4}-\d{2}$', 'Use YYYY-MM, e.g. 2025-09']
+              - name: end
+                label: End (YYYY-MM)
+                required: false
+                hint: Leave empty for your current role.
+                pattern: ['^\d{4}-\d{2}$', 'Use YYYY-MM, e.g. 2025-06']
+              - { name: note, label: Sub-line, required: false, hint: Shown under the company, e.g. the type of projects. }
+              - name: cvBullets
+                label: Bullets on the CV PDF
+                widget: number
+                value_type: int
+                min: 1
+                required: false
+                hint: The PDF shows only the first N bullets so it stays within 2 pages. Leave empty to show all. The website always shows all.
+              - name: highlights
+                label: Bullet points
+                label_singular: Bullet
+                widget: list
+                required: false
+                field: { name: point, label: Bullet, widget: text }
+
+  - name: skills
+    label: Skills
+    icon: build
+    file: src/data/skills.yaml
+    fields:
+      - name: groups
+        label: Skill groups
+        label_singular: Group
+        widget: list
+        root: true
+        summary: '{{group}}'
+        fields:
+          - { name: group, label: Group name }
+          - { name: items, label: Skills, widget: list }
+
+  - name: credentials
+    label: Certifications, volunteering & education
+    icon: workspace_premium
+    file: src/data/credentials.yaml
+    fields:
+      - name: certifications
+        label: Certifications
+        label_singular: Certification
+        widget: list
+        summary: '{{name}}'
+        fields:
+          - { name: name, label: Name }
+          - { name: issuer, label: Issuer }
+          - { name: url, label: Credential link, type: url, required: false }
+      - name: volunteering
+        label: Volunteering
+        label_singular: Organisation
+        widget: list
+        summary: '{{org}}'
+        fields:
+          - { name: org, label: Organisation }
+          - name: roles
+            label: Roles
+            label_singular: Role
+            widget: list
+            summary: '{{title}}'
+            fields:
+              - { name: title, label: Role }
+              - { name: since, label: Since (e.g. May 2026), required: false }
+              - { name: detail, label: Details, widget: text, required: false }
+              - name: links
+                label: Links
+                label_singular: Link
+                widget: list
+                required: false
+                summary: '{{label}}'
+                fields:
+                  - { name: label, label: Label }
+                  - { name: url, label: Link, type: url }
+      - name: education
+        label: Education
+        widget: list
+        summary: '{{degree}}'
+        fields:
+          - { name: degree, label: Degree }
+          - { name: school, label: School }
+          - { name: start, label: Start year, widget: number, value_type: int }
+          - { name: end, label: End year, widget: number, value_type: int }
+          - { name: inProgress, label: In progress, widget: boolean, required: false, default: false }

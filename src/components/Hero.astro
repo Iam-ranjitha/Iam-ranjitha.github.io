@@ -1,0 +1,215 @@
+---
+import { profile, initials, numbers } from '../lib/content';
+---
+
+<section class="hero" id="top">
+  <div class="wash w1" aria-hidden="true"></div>
+  <div class="wash w2" aria-hidden="true"></div>
+  <div class="wash w3" aria-hidden="true"></div>
+
+  <div class="wrap grid">
+    <div class="copy">
+      <p class="kicker">{profile.location}</p>
+      <h1>{profile.name}</h1>
+      <p class="role">{profile.role} at {profile.company}</p>
+      <p class="tagline">{profile.tagline}</p>
+      <ul class="tags" aria-label="Focus areas">
+        {profile.focus.map((f) => <li class="chip">{f}</li>)}
+      </ul>
+      <div class="cta">
+        <button class="btn btn-primary" type="button" data-open-contact>Get in touch</button>
+        <a class="btn btn-ghost" href="/cv/">View my CV</a>
+      </div>
+    </div>
+
+    <div class="portrait" aria-hidden={profile.photo ? undefined : 'true'}>
+      {
+        profile.photo ? (
+          <img src={profile.photo} alt={`Portrait of ${profile.name}`} width="240" height="240" />
+        ) : (
+          <div class="ph">
+            <span>{initials}</span>
+          </div>
+        )
+      }
+    </div>
+  </div>
+
+  <div class="wrap">
+    <dl class="numbers">
+      {
+        numbers.map((n) => (
+          <div>
+            <dt>{n.label}</dt>
+            <dd>{n.value}</dd>
+          </div>
+        ))
+      }
+    </dl>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    overflow: hidden;
+    padding: clamp(40px, 7vw, 88px) 0 clamp(40px, 6vw, 72px);
+  }
+  .wash {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(70px);
+    opacity: 0.55;
+    pointer-events: none;
+    animation: drift 18s ease-in-out infinite alternate;
+  }
+  .w1 {
+    width: 460px;
+    height: 460px;
+    background: #9bbcf0;
+    top: -140px;
+    right: -80px;
+  }
+  .w2 {
+    width: 380px;
+    height: 380px;
+    background: var(--terra-tint);
+    bottom: -120px;
+    left: -100px;
+    animation-delay: -6s;
+  }
+  .w3 {
+    width: 320px;
+    height: 320px;
+    background: var(--navy-tint);
+    top: 40%;
+    left: 40%;
+    animation-delay: -11s;
+  }
+  @keyframes drift {
+    to {
+      transform: translate(30px, 24px) scale(1.08);
+    }
+  }
+  .grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1.4fr 0.6fr;
+    gap: clamp(28px, 5vw, 72px);
+    align-items: center;
+  }
+  h1 {
+    font-size: clamp(2.8rem, 8vw, 5.4rem);
+    letter-spacing: -0.025em;
+  }
+  .role {
+    font-family: var(--serif);
+    font-size: clamp(1.25rem, 2.6vw, 1.7rem);
+    color: var(--navy);
+    margin: 14px 0 18px;
+  }
+  .tagline {
+    max-width: 56ch;
+    font-size: 1.15rem;
+  }
+  .tags {
+    list-style: none;
+    padding: 0;
+    margin: 22px 0 28px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .tags .chip:nth-child(3n + 2) {
+    background: var(--gold-tint);
+  }
+  .tags .chip:nth-child(3n) {
+    background: var(--terra-tint);
+  }
+  .cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  button.btn {
+    font-family: inherit;
+    cursor: pointer;
+  }
+  .portrait {
+    justify-self: center;
+    width: min(100%, 230px);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 6px solid var(--card);
+    box-shadow:
+      0 0 0 3px var(--navy-tint),
+      0 26px 50px -26px rgba(18, 37, 74, 0.5);
+    background: var(--card);
+  }
+  .portrait img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .ph {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    place-items: center;
+    background:
+      radial-gradient(circle at 28% 22%, #9bbcf0 0 24%, transparent 25%),
+      radial-gradient(circle at 78% 70%, var(--terra-tint) 0 30%, transparent 31%),
+      var(--navy-tint);
+  }
+  .ph span {
+    font-family: var(--serif);
+    font-size: 4rem;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .numbers {
+    position: relative;
+    margin: clamp(36px, 6vw, 64px) 0 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+  }
+  .numbers div {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+    background: rgba(255, 255, 255, 0.85);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 18px 20px;
+  }
+  .numbers dd {
+    margin: 0;
+    font-family: var(--serif);
+    font-size: clamp(1.8rem, 3.6vw, 2.5rem);
+    font-weight: 600;
+    color: var(--terra);
+    line-height: 1.1;
+  }
+  .numbers dt {
+    color: var(--muted);
+    font-size: 0.95rem;
+    line-height: 1.35;
+    margin-top: 4px;
+  }
+  @media (max-width: 860px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+    .portrait {
+      order: -1;
+      width: 150px;
+      justify-self: start;
+    }
+    .numbers {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

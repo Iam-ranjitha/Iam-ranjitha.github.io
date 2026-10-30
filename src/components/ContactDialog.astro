@@ -1,0 +1,200 @@
+---
+import { profile } from '../lib/content';
+
+// Messages are delivered to the owner's inbox by FormSubmit (formsubmit.co).
+const endpoint = `https://formsubmit.co/ajax/${profile.email}`;
+const topics = ['Just saying hi', 'About PMI', 'Communities', 'Working together', 'A question'];
+---
+
+<dialog id="contact-dialog" aria-labelledby="cd-title" data-endpoint={endpoint} data-email={profile.email}>
+  <form method="dialog" class="close-form">
+    <button class="x" aria-label="Close">×</button>
+  </form>
+  <h2 id="cd-title">Send a message</h2>
+  <form id="contact-form" novalidate>
+    <label>
+      Name
+      <input name="name" type="text" autocomplete="name" required />
+    </label>
+    <label>
+      Email
+      <input name="email" type="email" autocomplete="email" required />
+    </label>
+    <label>
+      What is this about?
+      <select name="topic" required>
+        <option value="" disabled selected>Choose one</option>
+        {topics.map((t) => <option value={t}>{t}</option>)}
+      </select>
+    </label>
+    <input class="hp" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" />
+    <p class="status" id="cd-status" role="status" aria-live="polite"></p>
+    <button class="btn btn-primary" id="cd-send" type="submit">Send message</button>
+  </form>
+</dialog>
+
+<script is:inline>
+  (function () {
+    var dlg = document.getElementById('contact-dialog');
+    if (!dlg) return;
+    var form = document.getElementById('contact-form');
+    var status = document.getElementById('cd-status');
+    var send = document.getElementById('cd-send');
+    var endpoint = dlg.dataset.endpoint;
+    var mail = dlg.dataset.email;
+
+    function setStatus(text, kind) {
+      status.textContent = '';
+      status.className = 'status ' + (kind || '');
+      status.appendChild(document.createTextNode(text));
+    }
+    document.querySelectorAll('[data-open-contact]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        setStatus('');
+        if (dlg.showModal) dlg.showModal();
+        else dlg.setAttribute('open', '');
+        var first = form.querySelector('input[name=name]');
+        if (first) first.focus();
+      });
+    });
+    dlg.addEventListener('click', function (e) {
+      if (e.target === dlg) dlg.close();
+    });
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+      var data = new FormData(form);
+      if (data.get('_honey')) return;
+      var topic = data.get('topic');
+      send.disabled = true;
+      setStatus('Sending…');
+      fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          name: data.get('name'),
+          email: data.get('email'),
+          topic: topic,
+          _subject: 'Website message: ' + topic,
+          _template: 'table',
+          _captcha: 'false',
+        }),
+      })
+        .then(function (r) {
+          if (!r.ok) throw new Error('bad status');
+          return r.json();
+        })
+        .then(function (j) {
+          if (j && (j.success === 'true' || j.success === true)) {
+            form.reset();
+            setStatus('Thank you! Your message has been sent.', 'ok');
+          } else {
+            throw new Error('not sent');
+          }
+        })
+        .catch(function () {
+          setStatus('Sorry, that did not go through. Please email ' + mail + ' directly.', 'err');
+        })
+        .finally(function () {
+          send.disabled = false;
+        });
+    });
+  })();
+</script>
+
+<style>
+  dialog {
+    border: none;
+    border-radius: 24px;
+    padding: clamp(24px, 4vw, 36px);
+    width: min(92vw, 460px);
+    background: var(--card);
+    color: var(--text);
+    box-shadow: 0 40px 80px -30px rgba(18, 37, 74, 0.55);
+  }
+  dialog::backdrop {
+    background: rgba(18, 37, 74, 0.45);
+  }
+  h2 {
+    font-size: 1.9rem;
+    margin-bottom: 20px;
+  }
+  .close-form {
+    position: absolute;
+    top: 12px;
+    right: 14px;
+  }
+  .x {
+    border: none;
+    background: var(--navy-tint);
+    color: var(--ink);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    font-size: 1.4rem;
+    line-height: 1;
+    cursor: pointer;
+  }
+  .x:hover {
+    background: var(--gold-tint);
+  }
+  #contact-form {
+    display: grid;
+    gap: 16px;
+  }
+  label {
+    display: grid;
+    gap: 6px;
+    font-weight: 600;
+    color: var(--ink);
+    font-size: 0.97rem;
+  }
+  input,
+  select {
+    font: inherit;
+    font-weight: 400;
+    color: var(--text);
+    padding: 12px 14px;
+    border: 1.5px solid var(--line);
+    border-radius: 12px;
+    background: #fff;
+    width: 100%;
+  }
+  input:focus,
+  select:focus {
+    outline: 3px solid var(--navy-tint);
+    border-color: var(--navy);
+  }
+  .hp {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+  }
+  .status {
+    margin: 0;
+    min-height: 1.4em;
+    font-size: 0.97rem;
+  }
+  .status.ok {
+    color: #1d6b3c;
+    font-weight: 600;
+  }
+  .status.err {
+    color: var(--terra);
+    font-weight: 600;
+  }
+  #cd-send {
+    justify-content: center;
+    font-family: inherit;
+    cursor: pointer;
+  }
+  #cd-send:disabled {
+    opacity: 0.6;
+    cursor: wait;
+  }
+</style>

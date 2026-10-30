@@ -1,0 +1,8 @@
+- group: Project delivery
+  items: [Agile and Scrum delivery, Sprint planning, Backlog management, Stakeholder reporting, Risk management, QA and UAT coordination, Scope management, Resource planning]
+- group: Tools
+  items: [Jira, Trello, Asana, MS Project, Notion, Slack, HubSpot, ServiceNow, Zendesk]
+- group: Web and design
+  items: [WordPress, Shopify, Figma, Mobile app projects, HTML/CSS (basic)]
+- group: Cloud and operations
+  items: [AWS, Linux hosting, Incident management, DataDog, Squadcast, Git (basics)]
