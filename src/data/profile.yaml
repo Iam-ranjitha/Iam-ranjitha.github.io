@@ -29,6 +29,8 @@ numbers:
     label: deployments tracked to release
   - value: '3'
     label: 'Industries: IT services, cloud/SRE, automotive software'
+  - value: '20'
+    label: software and automotive releases delivered on time
 contact:
   heading: Stuck on something? My inbox is open.
   text: Feel free to connect with me to collaborate, discuss project management, or share best practices in project delivery.
