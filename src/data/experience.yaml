@@ -1,7 +1,8 @@
 - company: in-tech Group India Private Limited
   location: Kochi, India
+  draft: false
   roles:
-    - title: Project Coordinator
+    - title: Project manager
       start: 2025-09
       note: Software and automotive projects
       highlights:
@@ -14,9 +15,9 @@
         - Created project documents and PowerPoint presentations, and presented them to the overall team and the PMO team.
         - Handled knowledge-transfer (KT) sessions on new project management topics.
         - Supported quality control activities and process compliance.
-
 - company: White Rabbit Group
   location: Kochi, India
+  draft: false
   roles:
     - title: Project Coordinator
       start: 2024-03
@@ -32,9 +33,9 @@
         - Tracked QA status, regression bugs and release readiness across 60+ deployments, with near-zero post-release issues.
         - Shared weekly dashboards and risk logs with stakeholders, reducing scope creep by 80% over 6 months.
         - Planned resource allocation across 6+ developers and designers, avoiding overbooking and cutting delays by 80%.
-
 - company: Redux
   location: Kochi, India
+  draft: false
   roles:
     - title: Site Reliability Engineer
       start: 2022-04
@@ -44,9 +45,9 @@
         - Owned the incident lifecycle and wrote root cause analysis (RCA) reports for critical issues, resolving 90% of blockers within the agreed response time (SLA).
         - Joined the on-call rotation and set up monitoring with DataDog and Squadcast, reducing mean time to resolution by 35%.
         - Took initiative on team-priority projects across DevOps, Security and Networking, completing 10+ deliverables on time and helping reduce task slippage between teams by 20%.
-
 - company: Krishstar IT Solutions
   location: Chennai, India
+  draft: false
   roles:
     - title: Project Coordinator & Systems Engineer
       start: 2019-10
