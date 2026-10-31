@@ -19,12 +19,17 @@ singletons:
     fields:
       - { name: name, label: Full name }
       - { name: role, label: Job title }
-      - { name: company, label: Current company, hint: Short name shown in the hero, e.g. In-tech }
+      - { name: company, label: Current company, hint: Shown under your name in the hero. }
       - { name: location, label: Location }
       - name: careerStart
         label: Career start (YYYY-MM)
         hint: Years of experience are counted from this month.
         pattern: ['^\d{4}-\d{2}$', 'Use YYYY-MM, e.g. 2019-10']
+      - name: phone
+        label: Phone
+        required: false
+        hint: International format without spaces, e.g. +916379688175. Leave empty to hide it everywhere.
+        pattern: ['^\+\d{8,15}$', 'Use + and digits only, e.g. +916379688175']
       - { name: email, label: Email, type: email }
       - { name: site, label: Website URL, type: url }
       - name: links
@@ -40,6 +45,7 @@ singletons:
         hint: Upload a portrait photo. Leave empty to show a coloured placeholder with your initials.
       - { name: focus, label: Focus areas, widget: list, hint: Shown as tags in the hero. }
       - { name: tagline, label: Tagline, widget: text }
+      - { name: inboxLine, label: Line above the Get in touch button }
       - name: numbers
         label: Highlight numbers
         label_singular: Number

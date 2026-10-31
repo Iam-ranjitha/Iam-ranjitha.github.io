@@ -1,7 +1,8 @@
 name: Ranjitha K N
 role: Project Coordinator
-company: In-tech
+company: in-tech Group India Private Limited
 location: Kochi, India
+phone: '+916379688175'
 careerStart: 2019-10
 email: ranjithak2898@gmail.com
 site: https://iam-ranjitha.github.io
@@ -15,26 +16,25 @@ focus:
   - Status, risk and change reporting
   - Budget and resource allocation
   - Client and stakeholder management
+inboxLine: Stuck on something? My inbox is open.
 tagline: Project coordination and PMO support across software and automotive programmes, covering planning, schedule tracking, risk management and stakeholder reporting.
 numbers:
   - value: '{years}+'
     label: years in delivery and operations
   - value: 30+
-    label: CMS and mobile app projects delivered
+    label: CMS and mobile app projects taken from kickoff to launch, with 60+ deployments tracked to release
   - value: 97%
     label: on-time delivery
-  - value: 60+
-    label: deployments tracked to release
 contact:
-  heading: Let's connect
+  heading: Stuck on something? My inbox is open.
   text: Feel free to connect with me to collaborate, discuss project management, or share best practices in project delivery.
 about:
-  - I'm a project coordinator based in Kochi, with a background in Agile delivery across software, CMS, mobile app and automotive projects.
-  - I've worked as a site reliability engineer and a project coordinator, and today I coordinate cross-functional teams at In-tech.
-  - I value clear communication, strong relationships with clients and teams, and steady improvement.
-  - I'm currently learning Generative AI and AI tools to see how they can make project delivery better.
-offWork: Outside work, I enjoy music, travel and painting.
-summary: Project Coordinator with {years} years of experience in Agile project delivery across software, CMS, mobile app and automotive projects, including two years as a Site Reliability Engineer on AWS. Coordinates cross-functional teams, turns client needs into clear plans, and keeps stakeholders informed with trackers, dashboards and risk reports. Values clear communication, strong relationships with clients and teams, and steady improvement. Currently learning Generative AI and AI tools to improve project delivery.
+  - I'm a project coordinator based in Kochi, with a background in Agile delivery across software, CMS, mobile app and automotive projects. My work covers project planning, schedule tracking, risk and status reporting, and keeping clients, stakeholders and delivery teams aligned from kickoff to release.
+  - I specialize in Agile methodologies, continuous improvement and quality delivery. I build strong relationships with clients, stakeholders and team members, because clear communication and a customer-focused approach are essential for success.
+  - I'm actively learning Generative AI, AI models and related tools, and exploring how they can improve project management and delivery processes. I enjoy using technology and new ideas to solve business problems.
+  - Beyond my day job, I'm a PMI member, a member of the Kochi Branch Council of the PMI Kerala Chapter, and a volunteer with the AWS User Group Kochi.
+offWork: Outside of work, I enjoy listening to music, travelling, painting, and exploring creative outlets that keep me balanced and inspired.
+summary: Project Coordinator with {years} years of experience in Agile project delivery across software, CMS, mobile app and automotive projects, including two years as a Site Reliability Engineer on AWS. Coordinates teams across departments, turns client needs into clear plans, and keeps stakeholders informed with trackers, dashboards and risk reports. Values clear communication, strong relationships with clients and teams, and steady improvement. Currently learning Generative AI and AI tools to improve project delivery.
 languages:
   - name: English
     level: Fluent, professional

@@ -14,12 +14,14 @@ const Profile = z.object({
   company: z.string(),
   location: z.string(),
   careerStart: month,
+  phone: z.string().optional(),
   email: z.string().email(),
   site: url,
   links: z.object({ linkedin: url, github: url }),
   photo: z.string().optional(),
   focus: z.array(z.string()),
   tagline: z.string(),
+  inboxLine: z.string(),
   numbers: z.array(z.object({ value: z.string(), label: z.string() })),
   contact: z.object({ heading: z.string(), text: z.string() }),
   about: z.array(z.string()),
@@ -105,5 +107,7 @@ export const initials = profile.name
 export const years = Math.floor((Date.now() - new Date(`${profile.careerStart}-01`).getTime()) / (365.25 * 864e5));
 export const summary = profile.summary.replace('{years}', `${years}+`);
 export const numbers = profile.numbers.map((n) => ({ ...n, value: n.value.replace('{years}', String(years)) }));
+// Shows +916379688175 as +91 63796 88175.
+export const phoneDisplay = profile.phone?.replace(/^\+91(\d{5})(\d{5})$/, '+91 $1 $2') ?? profile.phone;
 export const cvFile = `${profile.name.replace(/\s+/g, '-')}-CV.pdf`;
 export const host = (u: string) => u.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');

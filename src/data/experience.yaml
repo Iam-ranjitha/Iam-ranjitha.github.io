@@ -1,17 +1,19 @@
-- company: In-tech Group India Private Limited
+- company: in-tech Group India Private Limited
   location: Kochi, India
   roles:
     - title: Project Coordinator
       start: 2025-09
       note: Software and automotive projects
       highlights:
-        - Supported project planning, schedule tracking and feature setup so market deployments happened on time.
-        - Coordinated cross-functional teams across multiple departments on software and automotive projects.
+        - Supported project planning, schedule tracking and feature setup so that software and automotive deployments reached their markets on time.
+        - Coordinated work across multiple departments to support project implementation.
         - Tracked tasks and progress in Jira and internal project tools.
-        - Identified project risks and issues, assessed their impact, and worked with stakeholders to resolve them in time.
-        - Worked with stakeholders and committees to keep communication and project goals aligned.
-        - Prepared documentation, status reports and milestone updates for senior stakeholders.
-        - Supported quality control and process compliance.
+        - Identified project risks and issues, assessed their impact and worked with stakeholders to resolve them in time.
+        - Worked with committees and project teams to keep communication and project goals aligned.
+        - Prepared project documentation, status reports and milestone updates for senior stakeholders.
+        - Created project documents and PowerPoint presentations, and presented them to the overall team and the PMO team.
+        - Handled knowledge-transfer (KT) sessions on new project management topics.
+        - Supported quality control activities and process compliance.
 
 - company: White Rabbit Group
   location: Kochi, India
@@ -22,14 +24,14 @@
       note: CMS and mobile app projects
       highlights:
         - Delivered 30+ CMS (WordPress, Shopify) and mobile app projects from kickoff to launch, managing timelines, scope, testing and deployment.
-        - Bridged clients, project managers and technical teams, cutting feedback turnaround by 40% and reaching 97% on-time delivery.
+        - Acted as the link between clients, project managers and technical teams, cutting feedback turnaround by 40% and reaching 97% on-time delivery.
         - Turned client requirements (via HubSpot) into technical briefs and sprint tasks, reducing scope-related delays by 60%.
         - Built trackers in Jira and Notion, improving sprint visibility and reducing missed QA/UAT steps by 40%.
-        - Ran 15+ Agile ceremonies a week across 4+ concurrent projects.
-        - Led UI/UX reviews in Figma, reaching 99% design-to-development alignment and less rework.
-        - Tracked QA, regression bugs and release readiness across 60+ deployments, with near-zero post-release issues.
-        - Shared weekly dashboards and risk logs, reducing scope creep by 80% over 6 months.
-        - Allocated work across 6+ developers and designers, avoiding overbooking and cutting delays by 80%.
+        - Ran 15+ Agile ceremonies a week (stand-ups, sprint planning, retrospectives) across 4+ concurrent projects.
+        - Coordinated UI/UX review cycles in Figma, reaching 99% design-to-development alignment and reducing rework.
+        - Tracked QA status, regression bugs and release readiness across 60+ deployments, with near-zero post-release issues.
+        - Shared weekly dashboards and risk logs with stakeholders, reducing scope creep by 80% over 6 months.
+        - Planned resource allocation across 6+ developers and designers, avoiding overbooking and cutting delays by 80%.
 
 - company: Redux
   location: Kochi, India
@@ -39,9 +41,9 @@
       end: 2024-03
       highlights:
         - Led AWS migration projects, improving uptime by 25% and reducing support tickets by 60%.
-        - Owned the full incident lifecycle and root cause analysis (RCA) write-ups for critical issues, resolving 90% of blockers within the agreed response time (SLA).
-        - Joined the on-call rotation and set up monitoring (DataDog, Squadcast), cutting mean time to resolution by 35%.
-        - Took the lead on team-priority projects across DevOps, Security and Networking, delivering 10+ items and reducing cross-team task slippage by 20%.
+        - Owned the incident lifecycle and wrote root cause analysis (RCA) reports for critical issues, resolving 90% of blockers within the agreed response time (SLA).
+        - Joined the on-call rotation and set up monitoring with DataDog and Squadcast, reducing mean time to resolution by 35%.
+        - Took initiative on team-priority projects across DevOps, Security and Networking, completing 10+ deliverables on time and helping reduce task slippage between teams by 20%.
 
 - company: Krishstar IT Solutions
   location: Chennai, India
@@ -50,7 +52,7 @@
       start: 2019-10
       end: 2022-03
       highlights:
-        - Led the Agile rollout for a 4-person technical team, improving delivery timelines and teamwork between support and development.
+        - Led the Agile rollout for a 4-person technical team, improving delivery timelines and collaboration between support and development.
         - Managed 5+ internal support projects and triaged 100+ technical tickets in Scrum, keeping SLA compliance above 95%.
-        - Handled system upgrades and kept operations running by resolving 99% of technical issues, with clear updates to stakeholders.
-        - Worked with cross-functional teams on stable internal systems and helped with early-stage project planning.
+        - Handled system upgrades and kept operations running, resolving 99% of technical issues and keeping stakeholders informed.
+        - Worked with teams across departments to keep internal systems stable and contributed to early-stage project planning.

@@ -13,11 +13,6 @@ const topics = ['Just saying hi', 'About PMI', 'Communities', 'Working together'
         <p class="kicker">Contact</p>
         <h2>{profile.contact.heading}</h2>
         <p class="text">{profile.contact.text}</p>
-        <div class="cta">
-          <a class="btn btn-ghost" href={profile.links.linkedin}>LinkedIn</a>
-          <a class="btn btn-ghost" href={profile.links.github}>GitHub</a>
-        </div>
-        <p class="mail">{profile.email}</p>
       </div>
 
       <form id="contact-form" class="card" data-endpoint={endpoint} data-email={profile.email} data-name={firstName} novalidate>
@@ -138,17 +133,7 @@ const topics = ['Just saying hi', 'About PMI', 'Communities', 'Working together'
   .text {
     max-width: 46ch;
     font-size: 1.15rem;
-    margin-bottom: 26px;
-  }
-  .cta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-  }
-  .mail {
-    margin: 22px 0 0;
-    color: var(--ink);
-    font-weight: 500;
+    margin-bottom: 0;
   }
   form {
     display: grid;
