@@ -19,12 +19,16 @@ focus:
 tagline: Project coordination and PMO support across software and automotive programmes, covering planning, schedule tracking, risk management and stakeholder reporting.
 inboxLine: Stuck on something? My inbox is open.
 numbers:
-  - value: '{years}+'
-    label: years in delivery and operations
+  - value: '7'
+    label: years in delivery, operations and project coordination
   - value: 30+
-    label: CMS and mobile app projects taken from kickoff to launch, with 60+ deployments tracked to release
+    label: CMS and mobile app projects delivered in 16 months
   - value: 97%
-    label: on-time delivery
+    label: on-time delivery across 4+ concurrent projects
+  - value: '60'
+    label: deployments tracked to release
+  - value: '3'
+    label: 'Industries: IT services, cloud/SRE, automotive software'
 contact:
   heading: Stuck on something? My inbox is open.
   text: Feel free to connect with me to collaborate, discuss project management, or share best practices in project delivery.
