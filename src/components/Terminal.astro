@@ -1,0 +1,219 @@
+---
+import { profile, firstName, years } from '../lib/content';
+
+const city = profile.location.split(',')[0];
+const user = `${firstName.toLowerCase()}@${city.toLowerCase()}:~$`;
+const lines = [
+  { text: profile.name, cls: 'name' },
+  { text: `${profile.role} at ${profile.company}`, cls: '' },
+  { text: profile.location, cls: '' },
+  { text: `${years}+ years of experience`, cls: '' },
+];
+---
+
+<dialog id="terminal" aria-label={`About ${profile.name}`} data-prompt={user} data-lines={JSON.stringify(lines)}>
+  <div class="win">
+    <div class="bar">
+      <span class="title">{user.replace('$', '')}</span>
+    </div>
+    <div class="screen" id="term-out" aria-live="polite"></div>
+    <div class="foot">
+      <button class="exit" type="button" data-term-close autofocus>Exit</button>
+    </div>
+  </div>
+</dialog>
+
+<script is:inline>
+  (function () {
+    var d = document.getElementById('terminal');
+    if (!d || !d.showModal) return;
+    var out = document.getElementById('term-out');
+    var prompt = d.dataset.prompt;
+    var lines = JSON.parse(d.dataset.lines);
+    var timers = [];
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function later(fn, ms) {
+      timers.push(setTimeout(fn, ms));
+    }
+    function el(tag, cls, text) {
+      var n = document.createElement(tag);
+      if (cls) n.className = cls;
+      if (text) n.textContent = text;
+      return n;
+    }
+    function play() {
+      timers.forEach(clearTimeout);
+      timers = [];
+      out.textContent = '';
+      var row = el('div', 'row');
+      row.appendChild(el('span', 'ps', prompt + ' '));
+      var typed = el('span', 'cmd');
+      var cursor = el('span', 'cursor', ' ');
+      row.appendChild(typed);
+      row.appendChild(cursor);
+      out.appendChild(row);
+
+      function showOutput() {
+        cursor.className = 'cursor off';
+        lines.forEach(function (l, i) {
+          var show = function () {
+            out.appendChild(el('div', 'row out ' + l.cls, l.text));
+            if (i === lines.length - 1) {
+              var end = el('div', 'row');
+              end.appendChild(el('span', 'ps', prompt + ' '));
+              end.appendChild(el('span', 'cursor', ' '));
+              out.appendChild(end);
+            }
+          };
+          if (reduce) show();
+          else later(show, 260 * (i + 1));
+        });
+      }
+      var cmd = 'whoami';
+      if (reduce) {
+        typed.textContent = cmd;
+        showOutput();
+        return;
+      }
+      cmd.split('').forEach(function (ch, i) {
+        later(function () {
+          typed.textContent += ch;
+        }, 450 + i * 110);
+      });
+      later(showOutput, 450 + cmd.length * 110 + 350);
+    }
+    function open() {
+      if (!d.open) d.showModal();
+      play();
+    }
+    function close() {
+      timers.forEach(clearTimeout);
+      if (d.open) d.close();
+    }
+    d.querySelectorAll('[data-term-close]').forEach(function (b) {
+      b.addEventListener('click', close);
+    });
+    d.addEventListener('click', function (e) {
+      if (e.target === d) close();
+    });
+    d.addEventListener('close', function () {
+      timers.forEach(clearTimeout);
+    });
+    document.querySelectorAll('[data-open-terminal]').forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        window.scrollTo(0, 0);
+        open();
+      });
+    });
+    open();
+  })();
+</script>
+
+<style>
+  dialog {
+    border: none;
+    padding: 0;
+    background: transparent;
+    width: min(92vw, 660px);
+    max-width: none;
+    overflow: visible;
+  }
+  dialog::backdrop {
+    background: rgba(18, 37, 74, 0.42);
+    backdrop-filter: blur(6px);
+  }
+  .win {
+    background: #ffffff;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 40px 90px -30px rgba(18, 37, 74, 0.6);
+    font-family: ui-monospace, 'SF Mono', Menlo, Monaco, Consolas, monospace;
+  }
+  .bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 16px;
+    background: var(--bg-2);
+    border-bottom: 1px solid var(--line);
+  }
+  .title {
+    color: var(--muted);
+    font-size: 0.85rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .screen {
+    padding: 22px 22px 14px;
+    min-height: 230px;
+    font-size: clamp(0.88rem, 2.6vw, 1.05rem);
+    line-height: 1.75;
+    color: var(--text);
+  }
+  .screen :global(.row) {
+    overflow-wrap: anywhere;
+  }
+  .screen :global(.ps) {
+    color: var(--navy);
+    font-weight: 700;
+  }
+  .screen :global(.cmd) {
+    color: var(--ink);
+    font-weight: 600;
+  }
+  .screen :global(.out) {
+    animation: show 0.25s ease both;
+  }
+  .screen :global(.name) {
+    color: var(--terra);
+    font-weight: 700;
+    font-size: 1.15em;
+  }
+  .screen :global(.cursor) {
+    display: inline-block;
+    width: 0.6em;
+    height: 1.05em;
+    background: var(--navy);
+    vertical-align: text-bottom;
+    animation: blink 1s steps(1) infinite;
+  }
+  .screen :global(.cursor.off) {
+    display: none;
+  }
+  @keyframes blink {
+    50% {
+      opacity: 0;
+    }
+  }
+  @keyframes show {
+    from {
+      opacity: 0;
+      transform: translateY(4px);
+    }
+  }
+  .foot {
+    display: flex;
+    justify-content: flex-end;
+    padding: 12px 16px 16px;
+    border-top: 1px solid var(--line);
+    background: #fbfcff;
+  }
+  .exit {
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+    padding: 10px 26px;
+    border-radius: 10px;
+    border: 2px solid var(--navy);
+    background: var(--navy);
+    color: #fff;
+  }
+  .exit:hover {
+    background: var(--ink);
+    border-color: var(--ink);
+  }
+</style>
